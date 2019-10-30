@@ -14,29 +14,51 @@ const Item = Form.Item
 登陆路由组件
  */
 class Login extends Component {
+  handleSubmit = e => {
+    e.preventDefault();
+    const form = this.props.form
+    const username = form.getFieldValue('username')
+    const password = form.getFieldValue('password')
+    const values = form.getFieldsValue()
+    console.log(username,password,values)
+  }
 
   render() {
-
+    console.log(this.props.form)
+    const { getFieldDecorator } = this.props.form;
     return (
       <div className='login'>
         <header className='login-header'>
           <img src={logo} alt="logo"/>
-          <h1>React项目: 后台管理系统</h1>
+          <h1>尊❤尊</h1>
         </header>
 
         <section className='login-content'>
-          <h3>用户登陆</h3>
+          <h3>🤾‍♀️</h3>
           <Form onSubmit={this.login} className="login-form">
             <Item>
-              <Input prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                     placeholder="用户名"/>
+              {
+                getFieldDecorator('username')(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="请输入用户名"
+                  />,
+                )
+              }
             </Item>
             <Item>
-              <Input prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                     type="password" placeholder="密码"/>
+            {
+                getFieldDecorator('password')(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type='password'
+                    placeholder="密码"
+                  />,
+                )
+              }
             </Item>
             <Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
+              <Button  onClick={this.handleSubmit} type="primary" htmlType="submit" className="login-form-button">
                 登录
               </Button>
             </Item>
@@ -46,5 +68,7 @@ class Login extends Component {
     )
   }
 }
+ 
+const LoginWrap = Form.create()(Login)
 
-export default Login
+export default LoginWrap
